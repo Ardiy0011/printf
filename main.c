@@ -20,6 +20,5 @@ int main(void)
     /* Test with a percent symbol*/
     display = _printf("100%%\n");
 
-
-    return 0;
+    return (0);
 }
