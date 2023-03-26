@@ -52,5 +52,5 @@ int _printf(const char *format, ...)
 
     va_end(arg_list);
 
-    give_us  (display);
+    give_us(display);
 }
