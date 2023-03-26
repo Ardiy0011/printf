@@ -2,59 +2,94 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "main.h"
-#include "main.c"
 
 /**
- * @_printf: enter point
- * Description: a function that takes  variable number of function
- * @display: local variable within argument before indefinte variable
- * @format: value to the iterated through
- * Return: Display
+ * _printf - custom printf function
+ * @format: format string
+ *
+ * Return: number of characters printed
  */
 int _printf(const char *format, ...)
 {
-va_list arg_list;
-int display = 0;
-const char *p;
+    va_list arg_list;
+    int display = 0;
+    const char *p;
 
-va_start(arg_list, format);
+    va_start(arg_list, format);
 
-for (p = format; *p != '\0'; p++)
-{
-if (*p != '%')
-{
-putchar(*p);
-display++;
-}
-else
-{
-p++;
-switch (*p)
-{
-case 'c':
-{
-char c = va_arg(arg_list, int);
-putchar(c);
-display++;
-break;
-}
-case 's':
-{
-const char *s = va_arg(arg_list, const char *);
-display += printf("%s", s);
-break;
-}
-case '%':
-{
-putchar('%');
-display++;
-break;
-}
-}
-}
+    for (p = format; *p != '\0'; p++)
+    {
+        if (*p != '%')
+        {
+            putchar(*p);
+            display++;
+        }
+        else
+        {
+            p++;
+            switch (*p)
+            {
+                case 'c':
+                {
+                    char c = va_arg(arg_list, int);
+                    putchar(c);
+                    display++;
+                    break;
+                }
+                case 's':
+                {
+                    const char *s = va_arg(arg_list, const char *);
+                    display += printf("%s", s);
+                    break;
+                }
+                case '%':
+                {
+                    putchar('%');
+                    display++;
+                    break;
+                }
+            }
+        }
+    }
+
+    va_end(arg_list);
+
+    give_us(display);
+
 }
 
-va_end(arg_list);
+int main(void)
+{
+    int len;
+    int len2;
+    unsigned int ui;
+    void *addr;
 
-give_us(display);
+    len = _printf("Let's try to printf a simple sentence.\n");
+    len2 = printf("Let's try to printf a simple sentence.\n");
+    ui = (unsigned int)INT_MAX + 1024;
+    addr = (void *)0x7ffe637541f0;
+    _printf("Length:[%d, %i]\n", len, len);
+    printf("Length:[%d, %i]\n", len2, len2);
+    _printf("Negative:[%d]\n", -762534);
+    printf("Negative:[%d]\n", -762534);
+    _printf("Unsigned:[%u]\n", ui);
+    printf("Unsigned:[%u]\n", ui);
+    _printf("Unsigned octal:[%o]\n", ui);
+    printf("Unsigned octal:[%o]\n", ui);
+    _printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
+    printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
+    _printf("Character:[%c]\n", 'H');
+    printf("Character:[%c]\n", 'H');
+    _printf("String:[%s]\n", "I am a string !");
+    printf("String:[%s]\n", "I am a string !");
+    _printf("Address:[%p]\n", addr);
+    printf("Address:[%p]\n", addr);
+    len = _printf("Percent:[%%]\n");
+    len2 = printf("Percent:[%%]\n");
+    _printf("Len:[%d]\n", len);
+    printf("Len:[%d]\n", len2);
+    _printf("Unknown:[%r]\n");
+    printf("Unknown:[%r]\n");
+    return (0);
 }
