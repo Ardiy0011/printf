@@ -7,53 +7,45 @@
 /**
  * _printf - enter point
  * Description: afunction that takes  variable number of function
- * @display: local variable within argument before indefinte variable
+ * @count: local variable within argument before indefinte variable
  * Return: Display
  */
 int _printf(const char *format, ...)
 {
-va_list arg_list;
-int display = 0;
-const char *p;
+    va_list args;
+    va_start(args, format);
 
-va_start(arg_list, format);
+    int count = 0;
+    while (*format != '\0')
+    {
+        if (*format == '%')
+        {
+            format++;
+            switch (*format)
+            {
+                case 'c':
+                    count += putchar(va_arg(args, int));
+                    break;
+                case 's':
+                    count += printf("%s", va_arg(args, char *));
+                    break;
+                case '%':
+                    count += putchar('%');
+                    break;
+                default:
+                    count += putchar('%');
+                    count += putchar(*format);
+                    break;
+            }
+        } 
+        else
+        {
+            count += putchar(*format);
+        }
+        format++;
+    }
 
-for (p = format; *p != '\0'; p++)
-{
-if (*p != '%')
-{
-putchar(*p);
-display++;
-}
-else
-{
-p++;
-switch (*p)
-{
-case 'c':
-{
-char c = va_arg(arg_list, int);
-putchar(c);
-display++;
-break;
-}
-case 's':
-{
-const char *s = va_arg(arg_list, const char *);
-display += printf("%s", s);
-break;
-}
-case '%':
-{
-putchar('%');
-display++;
-break;
-}
-}
-}
-}
+    va_end(args);
 
-va_end(arg_list);
-
-give_us(display);
+    return (count);
 }
