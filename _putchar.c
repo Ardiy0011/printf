@@ -1,6 +1,6 @@
-int putchar(int c) {
-    // your implementation here
-    // replace the printf statement with your own code
+int putchar(int c)
+{
+
     printf("%c", c);
     return c;
 }
