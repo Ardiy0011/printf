@@ -1,12 +1,9 @@
-# _printf
+# printf
+This project involves implementing a custom printf() function in C that handles various format specifiers using switch case statements.
 
-This project involves a retrofited basic implementation of a custom printf() function in C that can handles certain format specifiers using switch case statements.
+The printf() function is used to print output to stdout, based on the format and other arguments passed to it. The format string consists of two types of items - characters that will be printed to the screen and format commands that define how the other arguments to printf() are displayed. The format string is enclosed within double quotes and is composed of zero or more directives, ordinary characters (not %), and conversion specifications.
 
+Each conversion specification begins with the % character and ends with a conversion specifier. In between, there may be zero or more flags, an optional field width, an optional precision modifier, and an optional length modifier.
 
-## Task 0
-This Task handles the following format specifiers and symbols:
-%c: to print a single character
-%s: to print a string
-%d: to print an integer in decimal format
-%x: to print an integer in hexadecimal format etc
-nb : macro has ben used to redefine "return" to "give_us"
+To handle the different format specifiers, switch case statements will be used in the implementation of the custom printf() function
+
