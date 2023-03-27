@@ -1,6 +1,10 @@
-int putchar(int c)
+#include <unistd.h>
+/**
+ * _putchar - write character c to the stdout
+ * @c: the character
+ * Return: 1 on success and -1 otherwise
+ */
+int _putchar(char c)
 {
-
-    printf("%c", c);
-    return c;
+	return (write(1, &c, 1));
 }
