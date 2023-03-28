@@ -3,7 +3,7 @@
 void print_buffer(char buffer[], int *buff_ind);
 
 /**
- * _printf - Printf function that handles several instances of format specifiers in diffirent
+ * _printf - Printf function
  * @format: format.
  * Return: Printed chars.
  */
@@ -37,39 +37,8 @@ int _printf(const char *format, ...)
 			precision = get_precision(format, &i, list);
 			size = get_size(format, &i);
 			++i;
-
-			switch (format[i])
-			{
-				case 'c':
-					printed = handle_char(list, buffer, flags, width);
-					break;
-				case 's':
-					printed = handle_string(list, buffer, flags, width, precision);
-					break;
-				case 'd':
-				case 'i':
-					printed = handle_integer(list, buffer, flags, width, precision);
-					break;
-				case 'u':
-					printed = handle_unsigned_integer(list, buffer, flags, width, precision);
-					break;
-				case 'o':
-					printed = handle_octal(list, buffer, flags, width, precision);
-					break;
-				case 'x':
-				case 'X':
-					printed = handle_hexadecimal(list, buffer, flags, width, precision, format[i]);
-					break;
-				case 'p':
-					printed = handle_pointer(list, buffer, flags, width);
-					break;
-				case '%':
-					printed = handle_percent(buffer, flags, width);
-					break;
-				default:
-					printed = handle_invalid(format[i], buffer);
-			}
-
+			printed = handle_print(format, &i, list, buffer,
+				flags, width, precision, size);
 			if (printed == -1)
 				return (-1);
 			printed_chars += printed;
