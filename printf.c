@@ -3,7 +3,7 @@
 void print_buffer(char buffer[], int *buff_ind);
 
 /**
- * _printf - Printf function that handles several instances of format specifiers in diffirent cases
+ * _printf - Printf function that handles several instances of format specifiers in diffirent
  * @format: format.
  * Return: Printed chars.
  */
@@ -95,4 +95,3 @@ void print_buffer(char buffer[], int *buff_ind)
 
 	*buff_ind = 0;
 }
-
